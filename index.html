@@ -42,7 +42,7 @@
 <body>
 
     <div class="container">
-        <h1 id="question">¿Quieres ser mi San Valentín, [Su Nombre]? ❤️</h1>
+        <h1 id="question">¿Quieres ser mi San Valentín, amorshina? ❤️</h1>
         <img id="mainGif" class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpN61i/giphy.gif" alt="Cute gif">
         
         <div class="buttons">
@@ -66,12 +66,12 @@
             yesBtn.style.padding = (yesFontSize/2) + 'px ' + yesFontSize + 'px';
             
             // Frases divertidas
-            const phrases = ["¿Estás segura?", "Piénsalo bien...", "¡Oye! 🥺", "Te daré chocolates...", "¡Di que sí por favor!"];
+            const phrases = ["¿Estás segura?", "Piénsalo bien...", "¡Oye! 🥺", "Te compraré un ternurin...", "¡Di que sí por favor!"];
             noBtn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
         });
 
         yesBtn.addEventListener('click', () => {
-            question.innerText = "¡SABÍA QUE DIRÍAS QUE SÍ! Te amo ❤️";
+            question.innerText = "Obvio ibas a aceptar mami, te amo mucho ❤️";
             mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCiS0/giphy.gif"; // Gif de celebración
             noBtn.style.display = 'none';
         });
