@@ -5,49 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Quieres ser mi San Valentín? ❤️</title>
     <style>
+        :root {
+            --pink: #ff4d6d;
+            --light-pink: #ff85a1;
+            --bg: #fff0f3;
+        }
+
         body {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #ffeef2;
-            font-family: 'Arial', sans-serif;
+            background-color: var(--bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
         }
-        .container {
+
+        /* Lluvia de corazones */
+        .heart {
+            position: fixed;
+            color: var(--pink);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
             text-align: center;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            max-width: 400px;
+            z-index: 10;
+            max-width: 90%;
+            width: 400px;
+            border: 2px solid white;
         }
-        h1 { color: #d63384; font-size: 24px; }
-        .gif { width: 200px; margin-bottom: 20px; border-radius: 10px; }
-        .buttons { display: flex; justify-content: center; gap: 20px; margin-top: 20px; align-items: center; }
-        
+
+        h1 {
+            color: #c9184a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .gif-container {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        img {
+            border-radius: 15px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            height: 60px;
+            align-items: center;
+        }
+
         button {
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        #yesBtn { background-color: #ff4d6d; color: white; }
-        #noBtn { background-color: #adb5bd; color: white; position: relative; }
+
+        #yesBtn {
+            background-color: var(--pink);
+            color: white;
+            z-index: 100;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            background-color: #ff758f;
+        }
+
+        #noBtn {
+            background-color: #ced4da;
+            color: #495057;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="card">
         <h1 id="question">¿Quieres ser mi San Valentín, amorshina? ❤️</h1>
-        <img id="mainGif" class="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpN61i/giphy.gif" alt="Cute gif">
+        <div class="gif-container">
+            <img id="mainGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpN61i/giphy.gif" alt="tierno">
+        </div>
         
-        <div class="buttons">
-            <button id="yesBtn">¡SÍ! 😍</button>
-            <button id="noBtn">No 😢</button>
+        <div class="btn-group">
+            <button id="yesBtn">¡SIS! 😽</button>
+            <button id="noBtn">Non unu</button>
         </div>
     </div>
 
@@ -57,23 +129,45 @@
         const question = document.getElementById('question');
         const mainGif = document.getElementById('mainGif');
 
-        let yesFontSize = 18;
+        // Función para los corazones cayendo
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
 
-        noBtn.addEventListener('click', () => {
-            // El botón de "Sí" se hace más grande cada vez que intenta decir no
-            yesFontSize += 10;
-            yesBtn.style.fontSize = yesFontSize + 'px';
-            yesBtn.style.padding = (yesFontSize/2) + 'px ' + yesFontSize + 'px';
-            
-            // Frases divertidas
-            const phrases = ["¿Estás segura?", "Piénsalo bien...", "¡Oye! 🥺", "Te compraré un ternurin...", "¡Di que sí por favor!"];
-            noBtn.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+        // Movimiento del botón NO
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveButton();
         });
 
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        // Acción al decir SÍ
         yesBtn.addEventListener('click', () => {
-            question.innerText = "Obvio ibas a aceptar mami, te amo mucho ❤️";
-            mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCiS0/giphy.gif"; // Gif de celebración
+            question.innerText = "¡SABÍA QUE DIRÍAS QUE SÍ! ❤️ Te amo mucho";
+            mainGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ4ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6ZzB6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiCiS0/giphy.gif";
             noBtn.style.display = 'none';
+            
+            // Explosión de corazones al final
+            for(let i=0; i<50; i++) {
+                setTimeout(createHeart, i * 20);
+            }
         });
     </script>
 </body>
